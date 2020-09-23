@@ -7,7 +7,7 @@
 # More information on running powershell scripts:
 # https://www.itprotoday.com/powershell/how-run-powershell-script
 
-# Communicate with user: 
+# Communicate with user:
 Write-Host "This program takes a single folder with multiple zipped files and unblocks/unzips them into a specified folder, preserving the names of each zipped folder."
 Write-Host "If the destination folder does not exist, it will be created."
 Write-Host "If a certain file already exists in the destination folder, unzipping will be skipped for that particular file."
@@ -33,5 +33,9 @@ Get-ChildItem $source -Recurse | Unblock-File
 # https://powershell.org/forums/topic/unzip-multiple-zips-to-multiple-folders-from-a-single-source-folder/
 $zip = Get-ChildItem -Path $source -Filter *.zip
 foreach ($z in $zip){
-    Expand-Archive -Path $z.FullName -DestinationPath $dest$($z.BaseName) -Verbose
+    Expand-Archive -Path $z.FullName -DestinationPath $dest$($z.BaseName)
 }
+Write-Host ""
+Write-Host "Done transferring files"
+Write-Host "Number of files unblocked and unzipped:"
+Get-ChildItem $dest -Directory | Measure-Object | Select-Object Count
