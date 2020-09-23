@@ -39,3 +39,4 @@ Write-Host ""
 Write-Host "Done transferring files"
 Write-Host "Number of files unblocked and unzipped:"
 Get-ChildItem $dest -Directory | Measure-Object | Select-Object Count
+Get-ChildItem $dest -Name >> $dest\filenames.txt
